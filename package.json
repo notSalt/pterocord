@@ -1,0 +1,23 @@
+{
+  "name": "pterocord",
+  "version": "0.0.1",
+  "description": "Control your Pterodactyl panel from Discord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notSalt/pterocord.git"
+  },
+  "author": "_notSalt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/notSalt/pterocord/issues"
+  },
+  "homepage": "https://github.com/notSalt/pterocord#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "nodeactyl": "^2.0.3"
+  }
+}
