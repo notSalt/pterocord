@@ -13,6 +13,7 @@ Control your Pterodactyl panel from Discord
   * `owner` is an array of IDs that has access to commands
   * `panel_host` is the URL for your panel
   * `panel_key` is your panel API key
+  * `server_ip` is your Minecraft server's IP
 * Start the bot: `npm start`
 
 > For Linux, you can use the "screen" package to keep the bot running in the background.
@@ -26,6 +27,7 @@ Control your Pterodactyl panel from Discord
   "prefix": "/",
   "owner": ["253907199489736705"],
   "panel_host": "https://panel.example.com/",
-  "panel_key": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  "panel_key": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "server_ip": "mc.example.com"
 }
 ```
