@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/notSalt/pterocord#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "discord.js": "^12.2.0",
     "nodeactyl": "^2.0.3"
   }

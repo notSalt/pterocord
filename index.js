@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const Pterodactyl = require('nodeactyl')
+const axios = require('axios')
 const config = require('./config.json')
 
 const client = new Discord.Client()
@@ -17,15 +18,15 @@ client.once('ready', async () => {
     })
 
   client.setInterval(async () => {
-    const cpuUsage = await app.getCPUUsage(client.server)
-    const ramUsage = await app.getRAMUsage(client.server)
-    const diskUsage = await app.getDiskUsage(client.server)
-
-    client.user.setActivity(`CPU ${Math.round(cpuUsage.current)}% | RAM ${ramUsage.current}MB | DISK ${diskUsage.current}MB`)
-  }, 15000)
+    axios.get(`https://mcapi.xdefcon.com/server/${config.server_ip}/players/json`)
+      .then(res => {
+        const { players } = res.data
+        client.user.setActivity(`${players} players online`, {type: 'WATCHING'})
+      })
+  }, 5000)
 })
 
-client.on('message', message => {
+client.on('message', async message => {
   if (message.author.bot) return
   if (!config.owner.includes(message.author.id)) return
   if (!message.content.startsWith(config.prefix)) return
@@ -51,6 +52,17 @@ client.on('message', message => {
     app.killServer(client.server)
       .then(res => message.channel.send(res))
       .catch(err => message.channel.send(err))
+  } else if (cmd === 'status') {
+    const cpuUsage = await app.getCPUUsage(client.server)
+    const ramUsage = await app.getRAMUsage(client.server)
+    const diskUsage = await app.getDiskUsage(client.server)
+
+    const embed = new Discord.MessageEmbed()
+      .addField('CPU', `${Math.round(cpuUsage.current)}%`, true)
+      .addField('RAM', `${ramUsage.current}MB`, true)
+      .addField('Disk', `${diskUsage.current}MB`, true)
+
+    message.channel.send(embed)
   }
 })
 
